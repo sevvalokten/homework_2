@@ -1,0 +1,44 @@
+fun icAcilarToplami(kenarSayisi: Int): Int {
+    return (kenarSayisi - 2) * 180
+}
+
+
+fun maasHesapla(gunSayisi: Int): Int {
+    val gunlukSaat = 8
+    val normalSaatUcreti = 10
+    val mesaiSaatUcreti = 20
+    val mesaiSiniri = 160
+    
+    val toplamSaat = gunSayisi * gunlukSaat
+    
+    return if (toplamSaat <= mesaiSiniri) {
+        // Mesai yok, normal ücret
+        toplamSaat * normalSaatUcreti
+    } else {
+        // Normal çalışma + mesai ücreti
+        val normalUcret = mesaiSiniri * normalSaatUcreti
+        val mesaiSaati = toplamSaat - mesaiSiniri
+        val mesaiUcreti = mesaiSaati * mesaiSaatUcreti
+        normalUcret + mesaiUcreti
+    }
+}
+
+fun kotaUcretiHesapla(kotaMiktari: Int): Int {
+    val temelKota = 50 // GB
+    val temelUcret = 100 // ₺
+    val ekUcret = 4 // ₺ (her GB için)
+    
+    return if (kotaMiktari <= temelKota) {
+        temelUcret
+    } else {
+        val asanMiktar = kotaMiktari - temelKota
+        temelUcret + (asanMiktar * ekUcret)
+    }
+}
+
+fun main() {
+    // Test için örnek değerler
+    println("6 kenarlı bir şeklin iç açıları toplamı: ${icAcilarToplami(6)} derece")
+    println("22 gün çalışmanın maaşı: ${maasHesapla(22)} ₺")
+    println("75 GB kota kullanımının ücreti: ${kotaUcretiHesapla(75)} ₺")
+}
